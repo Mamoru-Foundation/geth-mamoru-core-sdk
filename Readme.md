@@ -1,6 +1,6 @@
 # geth-mamoru-core-sdk
 
-This implementation of the geth-mamoru-core-sdk requires the use of `go-ethereum` version > `1.11.0`. 
+This implementation of the geth-mamoru-core-sdk requires the use of `go-ethereum` version <= `1.10.0`. 
 
 ## Usage
 Install the package in an Ethereum-based project
