@@ -119,7 +119,7 @@ func TraceBlock(ctx context.Context,
 				}
 			}
 		}
-		stateDB.SetTxContext(tx.Hash(), i)
+		stateDB.Prepare(tx.Hash(), i)
 		vmenv := vm.NewEVM(blockCtx, core.NewEVMTxContext(msg), stateDB, config.chainConfig, vm.Config{})
 		if _, err := core.ApplyMessage(vmenv, msg, new(core.GasPool).AddGas(msg.Gas())); err != nil {
 			failed = err
@@ -182,7 +182,7 @@ func traceTx(ctx context.Context,
 	}
 
 	// Call Prepare to clear out the statedb access list
-	statedb.SetTxContext(txctx.TxHash, txctx.TxIndex)
+	statedb.Prepare(txctx.TxHash, txctx.TxIndex)
 	if _, err = core.ApplyMessage(vmenv, message, new(core.GasPool).AddGas(message.Gas())); err != nil {
 		return nil, fmt.Errorf("tracing failed: %w", err)
 	}
