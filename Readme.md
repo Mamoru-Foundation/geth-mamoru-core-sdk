@@ -24,7 +24,7 @@ Then, paste the following code into the Ethereum light client file `go-ethereum/
 
 ```go
 	////////////////////////////////////////////////////////////////////////////
-    if !mamoru.IsSnifferEnable() {
+    if !mamoru.IsSnifferEnable() || !mamoru.Connect() {
 		return 0, nil
     }
     ctx := context.Background()
@@ -107,7 +107,7 @@ Insert the main tracer code at the end of the function `func (bc *BlockChain) wr
 ```go
     ...
 	////////////////////////////////////////////////////////////
-	if !mamoru.IsSnifferEnable() {
+	if !mamoru.IsSnifferEnable() || !mamoru.Connect() {
 		return 0, nil
 	}
 

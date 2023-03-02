@@ -17,11 +17,7 @@ var sniffer *mamoru_sniffer.Sniffer
 
 func init() {
 	if IsSnifferEnable() {
-		var err error
-		sniffer, err = mamoru_sniffer.Connect()
-		if err != nil {
-			log.Error("Mamoru Sniffer connect error:", err)
-		}
+		Connect()
 	}
 }
 
@@ -76,4 +72,17 @@ func IsSnifferEnable() bool {
 	isEnable, ok := os.LookupEnv("MAMORU_SNIFFER_ENABLE")
 
 	return ok && isEnable == "true"
+}
+
+func Connect() bool {
+	if sniffer != nil {
+		return true
+	}
+	var err error
+	sniffer, err = mamoru_sniffer.Connect()
+	if err != nil {
+		log.Error("Mamoru Sniffer connect error", err)
+		return false
+	}
+	return true
 }
